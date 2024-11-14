@@ -1,0 +1,34 @@
+<script>
+
+// As maçãs custam R$ 0,30 cada se forem compradas menos do que uma dúzia, e R$ 0,25 se forem compradas pelo menos doze. Escreva um programa que leia o número de maçãs compradas, calcule e escreva o valor total da compra.
+
+//entrada
+
+let maçãs = parseFloat (prompt(" Digite a quantidade de maças"))
+
+
+
+let ValordaCompra = 0
+
+if (maçãs <= 12){
+
+ValordaCompra = (0.30 * maçãs)
+
+
+}
+
+else{
+
+    ValordaCompra = (0.25 * maçãs)
+}
+
+//saida
+
+
+document.write ("A quantidade é R$:" + ValordaCompra)
+
+
+
+
+
+</script>

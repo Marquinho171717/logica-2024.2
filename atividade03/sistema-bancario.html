@@ -1,0 +1,152 @@
+<script>
+
+// Lista para armazenar as contas
+let contas = [];
+
+// Função para exibir ou ocultar formulários
+function esconderTodosFormularios() {
+    document.getElementById('formCriarConta').style.display = 'none';
+    document.getElementById('formDepositar').style.display = 'none';
+    document.getElementById('formRetirar').style.display = 'none';
+    document.getElementById('formConsultarSaldo').style.display = 'none';
+    document.getElementById('formExibirDados').style.display = 'none';
+}
+
+function mostrarCriarConta() {
+    esconderTodosFormularios();
+    document.getElementById('formCriarConta').style.display = 'block';
+}
+
+function mostrarDepositar() {
+    esconderTodosFormularios();
+    document.getElementById('formDepositar').style.display = 'block';
+}
+
+function mostrarRetirar() {
+    esconderTodosFormularios();
+    document.getElementById('formRetirar').style.display = 'block';
+}
+
+function mostrarConsultarSaldo() {
+    esconderTodosFormularios();
+    document.getElementById('formConsultarSaldo').style.display = 'block';
+}
+
+function mostrarExibirDados() {
+    esconderTodosFormularios();
+    document.getElementById('formExibirDados').style.display = 'block';
+}
+
+// Função para criar uma conta
+function criarConta() {
+    const nomeTitular = document.getElementById("nomeTitular").value;
+    const tipoConta = document.getElementById("tipoConta").value;
+
+    if (!nomeTitular) {
+        document.getElementById("result").innerHTML = "<p class='error'>Por favor, insira o nome do titular.</p>";
+        return;
+    }
+
+    const conta = {
+        titular: nomeTitular,
+        tipo: tipoConta,
+        saldo: 0
+    };
+
+    contas.push(conta);
+    document.getElementById("result").innerHTML = `<p>Conta de ${nomeTitular} (${tipoConta}) criada com sucesso!</p>`;
+}
+
+// Função para depositar
+function depositar() {
+    const nomeTitular = document.getElementById("nomeTitularDeposito").value;
+    const valor = parseFloat(document.getElementById("valorDeposito").value);
+
+    if (valor <= 0) {
+        document.getElementById("result").innerHTML = "<p class='error'>O valor do depósito deve ser maior que zero.</p>";
+        return;
+    }
+
+    const conta = contas.find(c => c.titular === nomeTitular);
+    if (conta) {
+        conta.saldo += valor;
+        document.getElementById("result").innerHTML = `<p>Depósito de R$${valor.toFixed(2)} realizado com sucesso!</p>`;
+    } else {
+        document.getElementById("result").innerHTML = "<p class='error'>Conta não encontrada.</p>";
+    }
+}
+
+// Função para retirar
+function retirar() {
+    const nomeTitular = document.getElementById("nomeTitularRetiro").value;
+    const valor = parseFloat(document.getElementById("valorRetiro").value);
+
+    if (valor <= 0) {
+        document.getElementById("result").innerHTML = "<p class='error'>O valor da retirada deve ser maior que zero.</p>";
+        return;
+    }
+
+    const conta = contas.find(c => c.titular === nomeTitular);
+    if (conta) {
+        if (conta.saldo >= valor) {
+            conta.saldo -= valor;
+            document.getElementById("result").innerHTML = `<p>Retirada de R$${valor.toFixed(2)} realizada com sucesso!</p>`;
+        } else {
+            document.getElementById("result").innerHTML = "<p class='error'>Saldo insuficiente.</p>";
+        }
+    } else {
+        document.getElementById("result").innerHTML = "<p class='error'>Conta não encontrada.</p>";
+    }
+}
+
+// Função para consultar saldo
+function consultarSaldo() {
+    const nomeTitular = document.getElementById("nomeTitularSaldo").value;
+
+    const conta = contas.find(c => c.titular === nomeTitular);
+    if (conta) {
+        document.getElementById("result").innerHTML = `<p>Saldo da conta de ${nomeTitular}: R$${conta.saldo.toFixed(2)}</p>`;
+    } else {
+        document.getElementById("result").innerHTML = "<p class='error'>Conta não encontrada.</p>";
+    }
+}
+
+// Função para exibir dados
+function exibirDados() {
+    const nomeTitular = document.getElementById("nomeTitularExibir").value;
+
+    const conta = contas.find(c => c.titular === nomeTitular);
+    if (conta) {
+        document.getElementById("result").innerHTML = `
+            <p>Dados da Conta de ${nomeTitular}:</p>
+            <p>Tipo de Conta: ${conta.tipo}</p>
+            <p>Saldo: R$${conta.saldo.toFixed(2)}</p>
+        `;
+    } else {
+        document.getElementById("result").innerHTML = "<p class='error'>Conta não encontrada.</p>";
+    }
+}
+
+// Exibe o menu inicial
+mostrarCriarConta();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
